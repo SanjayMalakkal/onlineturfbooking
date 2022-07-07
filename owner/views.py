@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def ownerhome(request):
+def owner_home(request):
     return render(request,'owner/ownerhome.html')
 
 
