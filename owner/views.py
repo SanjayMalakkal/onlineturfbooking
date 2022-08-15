@@ -12,3 +12,6 @@ def manager_details(request):
 def manager_approval(request):
     return render(request,'owner/manager_approval.html')
 
+def user_details(request):
+    return render(request,'owner/user_details.html')
+
