@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+def home(request):
+    return render(request,'login/common_home.html')
+
+
 def login(request):
     return render(request,'login/log_in.html')
 
