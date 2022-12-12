@@ -1,48 +1,103 @@
-
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<meta charset="UTF-8">
+	<title>User Login</title>
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<script src=""></script>
+	<script src="{% static 'js/valid.js' %}"></script>
+	<style>
+		* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+	</style>
 </head>
 <body>
-
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="#">
-			<button>Sign Up</button>
+	<video autoplay muted loop id="myVideo">
+		<source src="{% static 'images/football.mp4' %}" type="video/mp4">
+	</video>
+	<div class="container">
+		<h1 class="label">User Login</h1>
+		<form class="login_form" action="" method="POST" name="form" onsubmit="return validated()">
+			{% csrf_token %}
+			{{message}} 
+			<div class="font">Email</div>
+			<input autocomplete="off" type="text" name="email">
+			<div id="email_error">Please Enter Your Username or Email</div>
+			<div class="font font2">Password</div>
+			<input type="password" name="password">
+			<div id="pass_error">Please Enter your Password</div>
+			<button type="submit">Login</button>
 		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="#">
-			<h1>Sign in</h1>
-			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>create account</h1>
-				<p>Enter your details and lets start playing</p>
-				<button class="ghost" id="signUp"> <a href="{% url 'user_register' %}">Sign Up</a> </button>
-			</div>
+		<div id="create-account-wrap" align="center">
+			<p>Not a member? <a href="{% url 'login:user_register' %}">Create Account</a><p>
 		</div>
-	</div>
-</div>
+	</div>	
+	<script>
+		var email = document.forms['form']['email'];
+		var password = document.forms['form']['password'];
 
+		var email_error = document.getElementById('email_error');
+		var pass_error = document.getElementById('pass_error');
 
+		email.addEventListener('textInput', email_Verify);
+		password.addEventListener('textInput', pass_Verify);
+
+		function validated(){
+			if (email.value.length < 9) {
+				email.style.border = "1px solid red";
+				email_error.style.display = "block";
+				email.focus();
+				return false;
+			}
+			if (password.value.length < 6) {
+				password.style.border = "1px solid red";
+				pass_error.style.display = "block";
+				password.focus();
+				return false;
+			}
+
+		}
+		function email_Verify(){
+			if (email.value.length >= 8) {
+				email.style.border = "1px solid silver";
+				email_error.style.display = "none";
+				return true;
+			}
+		}
+		function pass_Verify(){
+			if (password.value.length >= 5) {
+				password.style.border = "1px solid silver";
+				pass_error.style.display = "none";
+				return true;
+			}
+		}
+	</script>	
+	
 </body>
 </html>

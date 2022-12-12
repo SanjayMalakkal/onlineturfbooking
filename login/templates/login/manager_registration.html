@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Registration </title>
+    <link rel="stylesheet" href="{% static 'css/manager_register.css' %}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{message}} 
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" placeholder="Enter your name" required name="name">
+          </div>
+          <!-- <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" placeholder="Enter your username" required>
+          </div> -->
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="email" placeholder="Enter your email" required name="email">
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="tel" placeholder="Enter your number" required name="number" pattern="[6789][0-9]{9}">
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" placeholder="Enter your password" required name="password">
+          </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <textarea  class="" name="address" id="" cols="98" rows="10" required placeholder="Enter Address"></textarea>
+          </div>
+          <div align="center">
+            <span class="details">Upload picture</span>
+            <input type="file" placeholder="Files" required name="picture">
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+        <div id="create-account-wrap" align="center">
+          <p> <a href="{% url 'login:managerlogin' %}">Login</a><p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

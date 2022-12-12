@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'css/manager.css' %}">
+</head>
+<body>
+
+<div id="login-form-wrap">
+  <h2>Login</h2>
+  <form id="login-form" action="" method="POST">
+    {% csrf_token %}
+    
+    <p>
+    <input type="email" id="username" name="username" placeholder="Username" required><i class="validation"><span></span><span></span></i>
+    </p>
+    <p>
+    <input type="password" id="password" name="password" placeholder="Password" required><i class="validation"><span></span><span></span></i>
+    </p>
+    <p>
+    <input type="submit" id="login" value="Login">
+    </p>
+    {{message}}
+  </form>
+  <div id="create-account-wrap">
+    <p>Not a member? <a href="{% url 'login:manager_register' %}">Create Account</a><p></p>
+  </div>
+</div>
+
+  
+</body>
+</html>
